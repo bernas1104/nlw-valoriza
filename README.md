@@ -4,21 +4,21 @@
 
 - Cadastro de usuário
 
-  [ ] Não é permitido cadastrar mais de um usuário com o mesmo e-mail;
+  [x] Não é permitido cadastrar mais de um usuário com o mesmo e-mail;
 
-  [ ] Não é permitido cadastrar usuário sem nome
+  [x] Não é permitido cadastrar usuário sem nome
 
-  [ ] Não é permitido cadastrar usuário sem e-mail
+  [x] Não é permitido cadastrar usuário sem e-mail
 
-  [ ] Não é permitido cadastrar usuário sem senha
+  [x] Não é permitido cadastrar usuário sem senha
 
 - Cadastro de TAG
 
-  [ ] Não é permitido cadastrar mais de uma tag com o mesmo nome
+  [x] Não é permitido cadastrar mais de uma tag com o mesmo nome
 
-  [ ] Não é permitido cadastrar tag sem nome
+  [x] Não é permitido cadastrar tag sem nome
 
-  [ ] Não é permitido o cadastro por usuários que não sejam administradores
+  [/] Não é permitido o cadastro por usuários que não sejam administradores
 
 - Cadastro de elogios
 
