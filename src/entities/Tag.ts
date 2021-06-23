@@ -1,11 +1,12 @@
+/* eslint-disable camelcase */
 import { v4 as uuid } from 'uuid';
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryColumn,
-  UpdateDateColumn
-} from "typeorm";
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('tags')
 export default class Tag {

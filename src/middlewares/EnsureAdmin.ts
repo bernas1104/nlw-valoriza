@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express';
 
 export default function ensureAdmin(
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   const admin = true;
 
@@ -12,6 +13,6 @@ export default function ensureAdmin(
   }
 
   return response.status(401).json({
-    error: "Unauthorized user"
+    error: 'Unauthorized user',
   });
 }

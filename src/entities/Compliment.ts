@@ -1,10 +1,17 @@
+/* eslint-disable camelcase */
 import { v4 as uuid } from 'uuid';
-import { CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
-import Tag from "./Tag";
-import User from "./User";
+import {
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
+import Tag from './Tag';
+import User from './User';
 
 @Entity('compliments')
-export class Compliment {
+export default class Compliment {
   @PrimaryColumn()
   id: string;
 
