@@ -1,4 +1,5 @@
 import { getCustomRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import User from '../entities/User';
 import UsersRepository from '../repositories/UsersRepository';
 
@@ -27,10 +28,12 @@ export default class UsersService {
       throw new Error('User already exists');
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = usersRepository.create({
       name,
       email,
-      password,
+      password: passwordHash,
       admin,
     });
 
