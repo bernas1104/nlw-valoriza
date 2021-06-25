@@ -29,6 +29,11 @@ export default class CreateCompliments1624407022318
             isNullable: false,
           },
           {
+            name: 'message',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
