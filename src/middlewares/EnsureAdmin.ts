@@ -1,18 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express';
+import { getCustomRepository } from 'typeorm';
+import UsersRepository from '../repositories/UsersRepository';
 
-export default function ensureAdmin(
+export default async function ensureAdmin(
   request: Request,
   response: Response,
   next: NextFunction,
 ) {
-  const admin = true;
+  const usersRepository = getCustomRepository(UsersRepository);
+
+  const { admin } = await usersRepository.findOneOrFail({
+    id: request.user_id,
+  });
 
   if (admin) {
     return next();
   }
 
-  return response.status(401).json({
-    error: 'Unauthorized user',
+  return response.status(403).json({
+    error: 'Forbidden',
   });
 }
