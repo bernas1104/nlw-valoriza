@@ -50,4 +50,30 @@ export default class ComplimentsService {
 
     return compliment;
   }
+
+  public async listUserSentCompliments(
+    user_sender: string,
+  ): Promise<Compliment[]> {
+    const complimentsRepository = getCustomRepository(ComplimentsRepository);
+
+    const compliments = await complimentsRepository.find({
+      where: { user_sender },
+      relations: ['userSender', 'userReceiver', 'tag'],
+    });
+
+    return compliments;
+  }
+
+  public async listUserReceivedCompliments(
+    user_receiver: string,
+  ): Promise<Compliment[]> {
+    const complimentsRepository = getCustomRepository(ComplimentsRepository);
+
+    const compliments = await complimentsRepository.find({
+      where: { user_receiver },
+      relations: ['userSender', 'userReceiver', 'tag'],
+    });
+
+    return compliments;
+  }
 }

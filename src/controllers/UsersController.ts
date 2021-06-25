@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
 import UsersService from '../services/UsersService';
 
 export default class UsersController {
@@ -18,5 +19,19 @@ export default class UsersController {
         password,
       }),
     );
+  }
+
+  public async handleListUsers(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    // eslint-disable-next-line camelcase
+    const { user_id } = request;
+
+    const usersService = new UsersService();
+
+    return response
+      .status(200)
+      .json(classToClass(await usersService.listUsers(user_id)));
   }
 }

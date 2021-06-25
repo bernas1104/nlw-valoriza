@@ -7,6 +7,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Expose } from 'class-transformer';
 
 @Entity('tags')
 export default class Tag {
@@ -21,6 +22,11 @@ export default class Tag {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'nameCustom' })
+  nameCustom(): string {
+    return `#${this.name.split(' ').join('')}`;
+  }
 
   constructor() {
     if (!this.id) {

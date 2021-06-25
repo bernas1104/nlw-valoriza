@@ -1,4 +1,4 @@
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, Not } from 'typeorm';
 import { hash } from 'bcryptjs';
 import User from '../entities/User';
 import UsersRepository from '../repositories/UsersRepository';
@@ -40,5 +40,14 @@ export default class UsersService {
     await usersRepository.save(user);
 
     return user;
+  }
+
+  // eslint-disable-next-line camelcase
+  public async listUsers(user_id: string): Promise<User[]> {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    const users = await usersRepository.find({ where: { id: Not(user_id) } });
+
+    return users;
   }
 }

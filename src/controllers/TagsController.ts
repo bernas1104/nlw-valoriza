@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { classToPlain } from 'class-transformer';
 import TagsService from '../services/TagsService';
 
 export default class TagsController {
@@ -11,5 +12,16 @@ export default class TagsController {
     const tagsService = new TagsService();
 
     return response.status(201).json(await tagsService.createTag(name));
+  }
+
+  public async handleListTags(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const tagsService = new TagsService();
+
+    return response
+      .status(200)
+      .json(classToPlain(await tagsService.listTags()));
   }
 }
