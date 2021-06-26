@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -9,8 +9,8 @@
     "baseUrl": "./src",
     "allowJs": true,
     "typeRoots": [
-      "./src/@types",
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./@types"
     ],
     "types": [
       "jest",
@@ -20,11 +20,17 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
   },
   "exclude": [
     "./jest.config.js",
     "./prettier.config.js",
     "./coverage/**/*.js"
+  ],
+  "include": [
+    "./src/**/*"
+  ],
+  "files": [
+    "./src/@types/express/index.d.ts"
   ]
 }
