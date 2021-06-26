@@ -1,16 +1,10 @@
 import { getCustomRepository, Not } from 'typeorm';
 import { hash } from 'bcryptjs';
-import User from '../entities/User';
-import UsersRepository from '../repositories/UsersRepository';
+import User from '../../domain/entities/User';
+import UsersRepository from '../../infra/repositories/UsersRepository';
+import IUserService, { IUserRequest } from './interfaces/IUserService';
 
-interface IUserRequest {
-  name: string;
-  email: string;
-  password: string;
-  admin?: boolean;
-}
-
-export default class UsersService {
+export default class UsersService implements IUserService {
   public async createUser({
     name,
     email,

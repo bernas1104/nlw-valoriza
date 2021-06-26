@@ -1,18 +1,14 @@
-import { getCustomRepository } from 'typeorm';
-import Compliment from '../entities/Compliment';
-import ComplimentsRepository from '../repositories/ComplimentsRepository';
-import TagsRepository from '../repositories/TagsRepository';
-import UsersRepository from '../repositories/UsersRepository';
-
 /* eslint-disable camelcase */
-interface IComplimentRequest {
-  tag_id: string;
-  user_sender: string;
-  user_receiver: string;
-  message: string;
-}
+import { getCustomRepository } from 'typeorm';
+import Compliment from '../../domain/entities/Compliment';
+import ComplimentsRepository from '../../infra/repositories/ComplimentsRepository';
+import TagsRepository from '../../infra/repositories/TagsRepository';
+import UsersRepository from '../../infra/repositories/UsersRepository';
+import IComplimentsService, {
+  IComplimentRequest,
+} from './interfaces/IComplimentsService';
 
-export default class ComplimentsService {
+export default class ComplimentsService implements IComplimentsService {
   public async createCompliment({
     tag_id,
     user_sender,

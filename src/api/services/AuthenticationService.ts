@@ -1,14 +1,12 @@
 import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import UsersRepository from '../repositories/UsersRepository';
+import UsersRepository from '../../infra/repositories/UsersRepository';
+import IAuthenticationService, {
+  IAuthenticateRequest,
+} from './interfaces/IAuthenticationService';
 
-interface IAuthenticateRequest {
-  email: string;
-  password: string;
-}
-
-export default class AuthenticationService {
+export default class AuthenticationService implements IAuthenticationService {
   public async authenticateUser({
     email,
     password,

@@ -1,8 +1,9 @@
 import { getCustomRepository } from 'typeorm';
-import Tag from '../entities/Tag';
-import TagsRepository from '../repositories/TagsRepository';
+import Tag from '../../domain/entities/Tag';
+import TagsRepository from '../../infra/repositories/TagsRepository';
+import ITagService from './interfaces/ITagService';
 
-export default class TagsService {
+export default class TagsService implements ITagService {
   public async createTag(name: string): Promise<Tag> {
     const tagsRepository = getCustomRepository(TagsRepository);
 
