@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import User from 'domain/entities/User';
+import User from '../../../domain/entities/User';
 
 export interface IUserRequest {
   name: string;
@@ -8,7 +8,7 @@ export interface IUserRequest {
   admin?: boolean;
 }
 
-export default interface IUserService {
+export default interface IUsersService {
   createUser(data: IUserRequest): Promise<User>;
-  listUsers(user_id: string): Promise<User[]>;
+  listUsers(): Promise<User[]>;
 }

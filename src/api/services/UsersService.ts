@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
 import User from '../../domain/entities/User';
-import IUserService, { IUserRequest } from './interfaces/IUserService';
+import IUserService, { IUserRequest } from './interfaces/IUsersService';
 import IUsersRepository from '../../infra/repositories/interfaces/IUsersRepository';
 
 @injectable()

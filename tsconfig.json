@@ -28,7 +28,7 @@
     "./coverage/**/*.js"
   ],
   "include": [
-    "./src/**/*"
+    "./src/**/*.ts"
   ],
   "files": [
     "./src/@types/express/index.d.ts"

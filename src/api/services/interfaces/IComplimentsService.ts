@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import Compliment from 'domain/entities/Compliment';
+import Compliment from '../../../domain/entities/Compliment';
 
 export interface IComplimentRequest {
   tag_id: string;
