@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express';
 import { getCustomRepository } from 'typeorm';
-import UsersRepository from '../repositories/UsersRepository';
+import UsersRepository from '../../infra/repositories/UsersRepository';
 
 export default async function ensureAdmin(
   request: Request,
