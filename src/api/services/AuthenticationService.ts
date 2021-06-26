@@ -1,19 +1,23 @@
-import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import UsersRepository from '../../infra/repositories/UsersRepository';
+import { inject, injectable } from 'tsyringe';
+import IUsersRepository from '../../infra/repositories/interfaces/IUsersRepository';
 import IAuthenticationService, {
   IAuthenticateRequest,
 } from './interfaces/IAuthenticationService';
 
+@injectable()
 export default class AuthenticationService implements IAuthenticationService {
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
+
   public async authenticateUser({
     email,
     password,
   }: IAuthenticateRequest): Promise<string> {
-    const usersRepository = getCustomRepository(UsersRepository);
-
-    const user = await usersRepository.findOne({ email });
+    const user = await this.usersRepository.findByEmail(email);
     if (!user) {
       throw new Error('Incorrect e-mail/password combination');
     }

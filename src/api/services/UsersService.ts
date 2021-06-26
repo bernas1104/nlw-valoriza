@@ -1,46 +1,47 @@
-import { getCustomRepository, Not } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { injectable, inject } from 'tsyringe';
 import User from '../../domain/entities/User';
-import UsersRepository from '../../infra/repositories/UsersRepository';
 import IUserService, { IUserRequest } from './interfaces/IUserService';
+import IUsersRepository from '../../infra/repositories/interfaces/IUsersRepository';
 
+@injectable()
 export default class UsersService implements IUserService {
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
+
   public async createUser({
     name,
     email,
     password,
     admin,
   }: IUserRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
-
     if (!email) {
       throw new Error('Invalid e-mail');
     }
 
-    const userAlreadyExists = await usersRepository.findOne({ email });
+    const userAlreadyExists = await this.usersRepository.findByEmail(email);
     if (userAlreadyExists) {
       throw new Error('User already exists');
     }
 
     const passwordHash = await hash(password, 8);
 
-    const user = usersRepository.create({
+    const user = this.usersRepository.create({
       name,
       email,
       password: passwordHash,
       admin,
     });
 
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }
 
-  // eslint-disable-next-line camelcase
-  public async listUsers(user_id: string): Promise<User[]> {
-    const usersRepository = getCustomRepository(UsersRepository);
-
-    const users = await usersRepository.find({ where: { id: Not(user_id) } });
+  public async listUsers(): Promise<User[]> {
+    const users = await this.usersRepository.getAll();
 
     return users;
   }

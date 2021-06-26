@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
+import { container } from 'tsyringe';
 import ComplimentsService from '../services/ComplimentsService';
 
 export default class ComplimentsController {
@@ -11,7 +12,7 @@ export default class ComplimentsController {
     const { tag_id, message, user_receiver } = request.body;
     const { user_id: user_sender } = request;
 
-    const complimentsService = new ComplimentsService();
+    const complimentsService = container.resolve(ComplimentsService);
 
     return response.status(201).json(
       await complimentsService.createCompliment({
@@ -29,7 +30,7 @@ export default class ComplimentsController {
   ): Promise<Response> {
     const { user_id } = request;
 
-    const complimentsService = new ComplimentsService();
+    const complimentsService = container.resolve(ComplimentsService);
 
     const compliments = await complimentsService.listUserSentCompliments(
       user_id,
@@ -44,7 +45,7 @@ export default class ComplimentsController {
   ): Promise<Response> {
     const { user_id } = request;
 
-    const complimentsService = new ComplimentsService();
+    const complimentsService = container.resolve(ComplimentsService);
 
     const compliments = await complimentsService.listUserReceivedCompliments(
       user_id,

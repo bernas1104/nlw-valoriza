@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import './domain/database';
+import './api/dependencies';
 import router from './api/routes';
 
 const app = express();

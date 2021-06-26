@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import AuthenticationService from '../services/AuthenticationService';
 
 export default class AuthenticationControler {
@@ -8,7 +9,7 @@ export default class AuthenticationControler {
   ): Promise<Response> {
     const { email, password } = request.body;
 
-    const authenticationService = new AuthenticationService();
+    const authenticationService = container.resolve(AuthenticationService);
 
     return response
       .status(200)
